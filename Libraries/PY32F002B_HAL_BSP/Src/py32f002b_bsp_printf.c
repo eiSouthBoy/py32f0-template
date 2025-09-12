@@ -32,8 +32,8 @@ void BSP_USART_Config(void)
   DEBUG_USART_TX_GPIO_CLK_ENABLE();
 
   /**USART GPIO Configuration
-    PA2     ------> USART2_TX
-    PA3     ------> USART2_RX
+    PA3     ------> USART1_TX
+    PA4     ------> USART1_RX
     */
   GPIO_InitStruct.Pin = DEBUG_USART_TX_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
