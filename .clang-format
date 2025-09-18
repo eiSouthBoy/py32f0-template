@@ -1,0 +1,79 @@
+# .clang-format 配置文件, 根据指定的编码规则生成
+
+# 基础样式，基于 LLVM 并进行覆盖
+BasedOnStyle: LLVM
+SortIncludes: false
+
+# 缩进设置
+IndentWidth: 2                   # 规则4.3.1 使用4个空格缩进
+UseTab: Never                    # 规则4.3.1 禁止使用制表符
+TabWidth: 2
+AccessModifierOffset: -2         # public:, protected:, private:，缩进与class对齐
+
+# 大括号风格：Allman 风格（新行开始）
+BreakBeforeBraces: Custom         # 规则4.4.1 Allman 风格的大括号
+BreakBeforeBinaryOperators: None
+BraceWrapping:
+  AfterClass: false               # class后大括号另起一行
+  AfterControlStatement: true    # if, else, for, while 等控制语句后大括号另起一行
+  AfterEnum: false                # enum后大括号另起一行
+  AfterUnion: false               # union后大括号另起一行
+  AfterFunction: true            # function后大括号另起一行
+  AfterNamespace: false          # namespace的左大括号放在行末
+  AfterStruct: false              # struct后的大括号另起一行
+  AfterExternBlock: false        # extern "C" 的左大括号放在行末
+  BeforeCatch: true              # catch 前大括号另起一行
+  BeforeElse: true               # else 前大括号另起一行
+  IndentBraces: false            # 大括号不额外缩进
+
+# 控制语句设置
+AlwaysBreakAfterReturnType: None              # 确保返回类型和函数名不在返回类型之后强制换行，保持在同一行
+AlwaysBreakAfterDefinitionReturnType: None    # 专门针对函数定义，确保返回类型和函数名不在返回类型之后强制换行
+AllowShortIfStatementsOnASingleLine: false    # 规则4.7.2 禁止单行 if 语句
+AllowShortLoopsOnASingleLine: false           # 禁止单行 for/while 循环
+
+# 函数声明和调用格式化
+#AllowAllParametersOfDeclarationOnNextLine: false     # 规则4.5.1 函数声明参数不全部放到下一行
+#BinPackParameters: false                             # 禁止在函数声明和定义中将多个参数打包在一行，确保每个参数在必要时单独换行
+#BinPackArguments: false                              # 禁止在函数调用中将多个参数打包在一行，确保在行宽不足时参数能够合理换行并对齐
+
+# 参数对齐
+AlignAfterOpenBracket: Align                        # 当参数换行时，后续行的参数与第一个参数对齐
+ContinuationIndentWidth: 4                          # 规则4.3.1 连续行缩进4个空格，设置续行的缩进为4个空格，确保参数列表换行后的对齐缩进
+
+# 控制括号前的空格
+SpaceBeforeParens: ControlStatements                # 控制语句前加空格
+SpaceAfterCStyleCast: false                         # C 风格强制转换后不加空格
+
+# Switch 语句格式化
+IndentCaseLabels: true                              # 规则4.9.1 case/default 缩进一层
+
+# 指针对齐
+PointerAlignment: Right                              # 指针靠左对齐，如 int* ptr;
+
+# 等号操作符对齐
+#AlignOperands: true
+#AlignConsecutiveAssignments: true
+
+# 预处理指令格式化
+IndentPPDirectives: None                            # 规则4.14.1 预处理指令不缩进
+
+# 最大空行数
+MaxEmptyLinesToKeep: 1
+
+# 禁止单行函数定义
+AllowShortFunctionsOnASingleLine: None
+
+# 命名约定（无法通过 Clang-Format 强制执行，需要使用 Clang-Tidy 或其他工具）
+# 规则2.1.1 标识符命名使用驼峰风格
+
+# 类成员访问控制格式化
+# 规则4.16.1 公共、受保护、私有部分排列顺序，并与 class 对齐
+# 注意：Clang-Format 并不直接支持访问控制排序，需要手动排列或使用其他工具
+
+# 宏定义格式化（如果需要）
+# 根据需要进行自定义，例如对齐等
+AlignConsecutiveMacros: true
+
+# 规则4.2.1 行宽设置（按需调整）
+ColumnLimit: 0

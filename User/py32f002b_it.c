@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    py32f0xx_it.c
+  * @file    py32f002b_it.c
   * @author  MCU Application Team
   * @brief   Interrupt Service Routines.
   ******************************************************************************
@@ -21,8 +21,8 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "py32f0xx_hal.h"
-#include "py32f0xx_it.h"
+#include "main.h"
+#include "py32f002b_it.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
@@ -34,7 +34,7 @@
 /* External variables --------------------------------------------------------*/
 
 /******************************************************************************/
-/*          Cortex-M0+ Processor Interruption and Exception Handlers          */
+/*           Cortex-M0+ Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -72,14 +72,12 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  HAL_IncTick();
 }
 
 /******************************************************************************/
-/* PY32F0xx Peripheral Interrupt Handlers                                     */
+/* PY32F002B Peripheral Interrupt Handlers                                     */
 /* Add here the Interrupt Handlers for the used peripherals.                  */
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file.                                          */
 /******************************************************************************/
-
 /************************ (C) COPYRIGHT Puya *****END OF FILE******************/
