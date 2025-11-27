@@ -25,6 +25,9 @@
 /* Exported macro ------------------------------------------------------------*/
 #define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
 
+// #define PY32_OFFICE 1
+#define RK3566_IHOST 1
+
 /* Exported functions ------------------------------------------------------- */
 
 #endif /* __MAIN_H */

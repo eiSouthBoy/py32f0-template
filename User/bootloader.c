@@ -76,7 +76,7 @@ void Bootloader_Init(void)
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
 
   /* Check if the USER Button is pressed */
-  if (BSP_PB_GetState(BUTTON_USER) == 0x00)
+  if (BSP_PB_GetState(BUTTON_USER) == 0x01)
   {
     JumpToAddress(APP_ADDR);
   }
@@ -110,9 +110,15 @@ void Bootloader_Init(void)
 
   CLEAR_BIT(USART1->CR3, USART_CR3_ABREN);
 
+#ifdef PY32_OFFICE
   MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPD3, GPIO_PUPDR_PUPD3_0); // 01: 上拉
   CLEAR_BIT(GPIOA->MODER, GPIO_MODER_MODE3_0);                    // 10: 复用功能模式
-  SET_BIT(GPIOA->AFR[0], GPIO_AFRL_AFSEL3_0);                     // 0001:AF1 USART1_TX(PA3) USART1_RX(PA4)
+  SET_BIT(GPIOA->AFR[0], GPIO_AFRL_AFSEL3_0);                     // 0001:AF1 USART1_TX(PA3) USART1_RX(PA3)
+#elif defined(RK3566_IHOST)
+  MODIFY_REG(GPIOB->PUPDR, GPIO_PUPDR_PUPD4, GPIO_PUPDR_PUPD4_0); // 01: 上拉
+  CLEAR_BIT(GPIOB->MODER, GPIO_MODER_MODE4_0);                    // 10: 复用功能模式
+  SET_BIT(GPIOB->AFR[0], GPIO_AFRL_AFSEL4_0);                     // 0001:AF1 USART1_TX(PB4) USART1_RX(PB5)
+#endif
   SET_BIT(USART1->CR1, USART_CR1_TE);                             // 1： 传送使能
 
   USART_SendByte(ACK_BYTE);

@@ -31,6 +31,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
+#include "main.h"
 #include "py32f002b_ll_rcc.h"
 #include "py32f002b_ll_bus.h"
 #include "py32f002b_ll_system.h"
@@ -88,15 +89,28 @@ typedef enum
 /**
   * @brief User push-button
   */
-#define USER_BUTTON_PIN                         LL_GPIO_PIN_0
-#define USER_BUTTON_GPIO_PORT                   GPIOA
-#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOA)
-#define USER_BUTTON_GPIO_CLK_DISABLE()          LL_IOP_GRP1_DisableClock(LL_IOP_GRP1_PERIPH_GPIOA)
-#define USER_BUTTON_EXTI_IRQn                   EXTI0_1_IRQn
-#define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_0
+#ifdef PY32_OFFICE
+  #define USER_BUTTON_PIN                         LL_GPIO_PIN_0
+  #define USER_BUTTON_GPIO_PORT                   GPIOA
+  #define USER_BUTTON_GPIO_CLK_ENABLE()           LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOA)
+  #define USER_BUTTON_GPIO_CLK_DISABLE()          LL_IOP_GRP1_DisableClock(LL_IOP_GRP1_PERIPH_GPIOA)
+  #define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_0
+  #define USER_BUTTON_EXTI_IRQn                   EXTI0_1_IRQn
+  #define USER_BUTTON_IRQHANDLER                  EXTI0_1_IRQHandler
+
+#elif defined(RK3566_IHOST)
+  #define USER_BUTTON_PIN                         LL_GPIO_PIN_1
+  #define USER_BUTTON_GPIO_PORT                   GPIOB
+  #define USER_BUTTON_GPIO_CLK_ENABLE()           LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOB)
+  #define USER_BUTTON_GPIO_CLK_DISABLE()          LL_IOP_GRP1_DisableClock(LL_IOP_GRP1_PERIPH_GPIOB)
+  #define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_1
+  #define USER_BUTTON_EXTI_IRQn                   EXTI0_1_IRQn
+  #define USER_BUTTON_IRQHANDLER                  EXTI0_1_IRQHandler
+
+#endif
+
 #define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT(USER_BUTTON_EXTI_LINE)
 #define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig(USER_BUTTON_EXTI_LINE)
-#define USER_BUTTON_IRQHANDLER                  EXTI0_1_IRQHandler
 
 /* Aliases */
 #define KEY_BUTTON_PIN                          USER_BUTTON_PIN
